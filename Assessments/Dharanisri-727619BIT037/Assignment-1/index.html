@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV</title>
+
+    <!-- BOXICONS -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- CUSTOM STYLES -->
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="left_side">
+
+            <!-- PROFILE -->
+            <div class="profile">
+                <div class="img_setting">
+                    <img src="img.png">
+                </div>
+                <h4>Dharanisri</h4>
+                <h5>Web Developer</h5>
+                <button class="btn" onclick="PDF();">Download PDF</button>
+                <a href="#contact">
+                <button class="btn">Hire Me</button>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="right_side">
+
+            <!-- SUMMARY -->
+            <div class="right_items">
+                <h3 class="title">About Me</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quis ullam blanditiis iste! Quos deserunt ipsa iusto. Ullam, ipsa minus a fugiat, obcaecati blanditiis magnam incidunt quisquam perspiciatis pariatur enim nihil hic quibusdam doloremque fugit consectetur. Similique atque repudiandae praesentium esse pariatur veritatis deleniti quos explicabo id, sequi rem perspiciatis?</p>
+            </div>
+
+            <!-- EXPERIENCE -->
+            <div class="right_items">
+                
+                
+            <!-- CONTACT INFO -->
+            <div class="left_items">
+                <h4 class="title">Contact Info</h4>
+                <ul>
+                    <li>
+                        <span class="icons">
+                            <i class="bx bx-map"></i>
+                        </span>&nbsp;&nbsp;
+                        <span class="text">WWW.dharani.com</span>
+                    </li>
+                    <li>
+                        <span class="icons">
+                            <i class="bx bx-envelope"></i>
+                        </span>&nbsp;&nbsp;
+                        <span class="text">dharani@gmail.com</span>
+                    </li>
+                    <li>
+                        <span class="icons">
+                            <i class="bx bx-phone"></i>
+                        </span>&nbsp;&nbsp;
+                        <span class="text">9876543901</span>
+                    </li>
+                </ul>
+            </div>
+       
+            <br>
+
+
+            <!-- SKILLS -->
+            <div class="right_items">
+                <h4 class="title">Professional Skills</h4>
+                <div class="skills">
+                    <h4>HTML</h4>
+                    <div class="percent">
+                        <div style="width: 98%"></div>
+                    </div>
+                </div>
+                <div class="skills">
+                    <h4>CSS</h4>
+                    <div class="percent">
+                        <div style="width: 75%"></div>
+                    </div>
+                </div>
+                <div class="skills">
+                    <h4>JavaScript</h4>
+                    <div class="percent">
+                        <div style="width: 85%"></div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <section class="contact" id="contact">
+                <form action="/action_page.php">
+                    <label for="fname">Name</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                
+                    <label for="lname">Email</label>
+                    <input type="text" id="lname" name="lastname" placeholder="Your Email Id..">
+                    <label for="fname">Mobile Number</label>
+                    <input type="text" id="fname" name="firstname" placeholder="Your contact number..">
+                   
+                
+                    <label for="subject">Description</label>
+                    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+                
+                    <input type="submit" value="Submit">
+                  </form>
+                </section>
+            </div>
+
+           
+
+        </div>
+
+    </div>
+
+    <!-- HTML2PDF SOURCE -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- CUSTOM JS -->
+    <script type="text/javascript">
+    
+        function PDF(){
+    
+            const e = document.querySelector(".container");
+
+            // RESIZE
+            e.style.maxWidth = "700px";
+            
+            // OPTIONS
+            const opt = {
+                filename: '',
+                image: {
+                    type: "jpg",
+                    quality: 0.99
+                },
+                margin: 0,
+                jsPDF: {
+                    unit: "pt",
+                    format: "letter",
+                    orientation: "portrait"
+                },
+                pagebreak: {
+                    mode: ["avoid-all", "css", "legacy"]
+                }
+            };
+            html2pdf().set(opt).from(e).save();
+
+            // RESIZE
+            setTimeout(() => {e.style.maxWidth = "1400px";}, 2000);
+        }
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-check</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/css/eligibility.css">
+    <script src="../static/js/eligibility.js"></script>
+</head>
+
+<body>
+    {% include "navbar.html" %}
+    <div class="main-container" style="margin-top: 88px;">
+        <div class="information-container">
+            <h3>Before you register as a blood donor</h3>
+            <p>Most people can give blood but sometimes it is not possible to be a blood donor.</p>
+            <p>Please answer all of the following five questions so that we can advise if blood donation is appropriate
+                for you.
+                Your responses are not recorded in any way.</p>
+        </div>
+        <div class="form-page">
+            <div class="questions">
+                <div class="question">
+                    <h5>1. Are you 16 – 65 years old?</h5>
+                    <div class="options">
+                        <input class="form-check-input" type="radio" name="q1" value="Yes">
+                        <label class="form-check-label" for="q1Yes"> Yes</label>
+                        <span class="spacer"></span>
+                        <input class="form-check-input" type="radio" name="q1" value="No">
+                        <label class="form-check-label" for="q1No"> No</label>
+                        <span class="spacer"></span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h5>2. Do you currently weigh less than 50kg (7 stone 12 pounds)?</h5>
+                    <div class="options">
+                        <input class="form-check-input" type="radio" name="q2" id="q2Yes" value="Yes">
+                        <label class="form-check-label" for="q2Yes"> Yes</label>
+                        <span class="spacer"></span>
+                        <input class="form-check-input" type="radio" name="q2" id="q2No" value="No">
+                        <label class="form-check-label" for="q2No"> No</label>
+                        <span class="spacer"></span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h5>3. Have you had a blood or blood product transfusion since 1st January 1980?</h5>
+                    <div class="options">
+                        <input class="form-check-input" type="radio" name="q3" id="q3Yes" value="Yes">
+                        <label class="form-check-label" for="q3Yes"> Yes</label>
+                        <span class="spacer"></span>
+                        <input class="form-check-input" type="radio" name="q3" id="q3No" value="No">
+                        <label class="form-check-label" for="q3No"> No</label>
+                        <span class="spacer"></span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h5>4. Have you ever had a cancer other than basal cell carcinoma or cervical carcinoma insitu
+                        (CIN)?</h5>
+                    <div class="options">
+                        <input class="form-check-input      " type="radio" name="q4" id="q4Yes" value="Yes">
+                        <label class="form-check-label" for="q4Yes"> Yes</label>
+                        <span class="spacer"></span>
+                        <input class="form-check-input" type="radio" name="q4" id="q4No" value="No">
+                        <label class="form-check-label" for="q4No"> No</label>
+                        <span class="spacer"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="action text-center">
+            <button class="btn btn-danger" type="submit" disabled id="submit-btn" onclick="onSubmit()">Submit</button>
+        </div>
+
+        <!-- Not allowed Modal -->
+        <div class="modal fade" id="PreCheckFailure" tabindex="-1" aria-hidden="true" data-backdrop="static"
+            data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="Pre-check-failure">We appreciate your willingness !</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="closePreCheckFailure()"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Based on the answers you provided, we advise that you to <b>do not</b> donate blood.</p>
+                        <p>If you would like more information, please contact us on plasmadonorapplication@gmail.com</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closePreCheckFailure()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Allowed Modal -->
+        <div class="modal fade" id="PreCheckPass" tabindex="-1" aria-hidden="true" data-backdrop="static"
+            data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="Pre-check-pass">Thanks for answering !</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="closePreCheckPass()"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>You should be eligible to donate so please continue to Register and book an appointment.
+                        </p>
+                        <p>If you would like more information, please contact us on plasmadonorapplication@gmail.com</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a  href="{{url_for('donorpage')}}" class="btn btn-danger" type="submit">Continue to register</a>
+                        <button type="button" class="btn btn-secondary" onclick="closePreCheckPass()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

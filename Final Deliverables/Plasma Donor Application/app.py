@@ -16,6 +16,7 @@ sql = "SELECT * FROM mailer"
 stmt = ibm_db.prepare(conn, sql)
 ibm_db.execute(stmt)
 key = ibm_db.fetch_assoc(stmt)
+api_key = key['KEY'].strip()
 
 
 #Email
@@ -24,7 +25,7 @@ app.config['MAIL_SERVER'] = 'smtp.sendgrid.net'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'apikey'
-app.config['MAIL_PASSWORD'] = str(key['KEY'])
+app.config['MAIL_PASSWORD'] = api_key
 app.config['MAIL_DEFAULT_SENDER'] = 'PlasmaDonorZr@outlook.com'
 mail = Mail(app)
 
@@ -229,3 +230,4 @@ def sendEmail(email, data):
   msg.body = ('')
   msg.html = data
   mail.send(msg)
+

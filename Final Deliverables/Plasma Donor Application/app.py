@@ -12,13 +12,19 @@ from flask import Response
 conn=ibm_db.connect("DATABASE=bludb;HOSTNAME=824dfd4d-99de-440d-9991-629c01b3832d.bs2io90l08kqb1od8lcg.databases.appdomain.cloud;PORT=30119;Security=SSL;SSLServerCertificate=DigiCertGlobalRootCA.crt;UID=qdz26030;PWD=hC55ak4dG6UPcHuX;","","")
 app = Flask(__name__)
 
+sql = "SELECT * FROM mailer"
+stmt = ibm_db.prepare(conn, sql)
+ibm_db.execute(stmt)
+key = ibm_db.fetch_assoc(stmt)
+
+
 #Email
 app.config['SECRET_KEY'] = 'top-secret!'
 app.config['MAIL_SERVER'] = 'smtp.sendgrid.net'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'apikey'
-app.config['MAIL_PASSWORD'] = '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'
+app.config['MAIL_PASSWORD'] = str(key['KEY'])
 app.config['MAIL_DEFAULT_SENDER'] = 'PlasmaDonorZr@outlook.com'
 mail = Mail(app)
 
